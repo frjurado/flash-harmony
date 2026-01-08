@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor de Flashcards Musicales</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Controles de Filtro y Barajar -->
+    <div class="controls">
+        <select id="categoryFilter" onchange="applyFilter()">
+            <option value="all">Todas las Categorías</option>
+            <!-- Se llenará dinámicamente -->
+        </select>
+        <button class="shuffle-btn" onclick="shuffleCards()">🔀 Barajar</button>
+    </div>
+
+    <!-- Escenario de la Tarjeta -->
+    <div class="scene" onclick="flipCard()">
+        <div class="card" id="flashcard">
+            <!-- ANVERSO -->
+            <div class="card__face card__face--front">
+                <!-- Usamos un div contenedor para texto fallback si la imagen falla -->
+                <div id="frontContent"></div>
+            </div>
+            
+            <!-- REVERSO -->
+            <div class="card__face card__face--back">
+                <div id="backContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="prevCard()">&#8592;</button>
+        <div class="counter" id="counter">1 / 10</div>
+        <button class="nav-btn" onclick="nextCard()">&#8594;</button>
+    </div>
+
+    <div class="hint-text">Espacio o Clic para voltear | Flechas para navegar</div>
+
+    <script src="database.js"></script>
+    
+    <script>
+
+        // ==========================================
+        // LÓGICA DE LA APLICACIÓN
+        // ==========================================
+
+        let currentDeck = [...database]; // Copia de trabajo
+        let currentIndex = 0;
+        const cardElement = document.getElementById('flashcard');
+        const frontContent = document.getElementById('frontContent');
+        const backContent = document.getElementById('backContent');
+        const counter = document.getElementById('counter');
+        const categorySelect = document.getElementById('categoryFilter');
+
+        // Inicialización
+        function init() {
+            populateCategories();
+            renderCard();
+            
+            // Event Listeners de Teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space' || e.code === 'Enter') flipCard();
+                if (e.code === 'ArrowRight') nextCard();
+                if (e.code === 'ArrowLeft') prevCard();
+            });
+        }
+
+        // Llenar el dropdown de categorías automáticamente
+        function populateCategories() {
+            const allTags = new Set();
+            database.forEach(item => item.tags.forEach(tag => allTags.add(tag)));
+            
+            allTags.forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag;
+                option.innerText = tag;
+                categorySelect.appendChild(option);
+            });
+        }
+
+        // Filtrar tarjetas
+        function applyFilter() {
+            const selectedTag = categorySelect.value;
+            
+            if (selectedTag === 'all') {
+                currentDeck = [...database];
+            } else {
+                currentDeck = database.filter(item => item.tags.includes(selectedTag));
+            }
+            
+            currentIndex = 0;
+            // Resetear estado de volteo si cambiamos de filtro
+            cardElement.classList.remove('is-flipped');
+            renderCard();
+        }
+
+        // Barajar (Fisher-Yates Shuffle)
+        function shuffleCards() {
+            for (let i = currentDeck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+            }
+            currentIndex = 0;
+            cardElement.classList.remove('is-flipped');
+            renderCard();
+        }
+
+        // Renderizar la tarjeta actual
+        function renderCard() {
+            if (currentDeck.length === 0) {
+                frontContent.innerHTML = "<div class='placeholder-text'>No hay tarjetas</div>";
+                backContent.innerHTML = "";
+                counter.innerText = "0 / 0";
+                return;
+            }
+
+            const data = currentDeck[currentIndex];
+            
+            // Generar HTML para imágenes
+            const imgFront = `<img src="${data.frontImg}" alt="Pregunta" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                              <div style="display:none" class="placeholder-text">${data.tags[0]}<div class="placeholder-sub">(Imagen no encontrada)</div></div>`;
+            
+            const imgBack = `<img src="${data.backImg}" alt="Respuesta" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                             <div style="display:none" class="placeholder-text">Respuesta<div class="placeholder-sub">(Imagen no encontrada)</div></div>`;
+
+            frontContent.innerHTML = imgFront;
+            backContent.innerHTML = imgBack;
+
+            // Actualizar contador
+            counter.innerText = `${currentIndex + 1} / ${currentDeck.length}`;
+        }
+
+        // Funciones de interacción
+        function flipCard() {
+            if(currentDeck.length > 0) cardElement.classList.toggle('is-flipped');
+        }
+
+        function nextCard() {
+            if (currentIndex < currentDeck.length - 1) {
+                cardElement.classList.remove('is-flipped');
+                setTimeout(() => {
+                    currentIndex++;
+                    renderCard();
+                }, 200); // Pequeño delay para que se vea el reset del flip
+            }
+        }
+
+        function prevCard() {
+            if (currentIndex > 0) {
+                cardElement.classList.remove('is-flipped');
+                setTimeout(() => {
+                    currentIndex--;
+                    renderCard();
+                }, 200);
+            }
+        }
+
+        // Arrancar
+        init();
+
+    </script>
+</body>
+</html>
