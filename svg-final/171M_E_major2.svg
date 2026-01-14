@@ -1,0 +1,17 @@
+<svg class="typst-doc" viewBox="0 0 419.5275590551181 297.6377952755906" width="419.5275590551181pt" height="297.6377952755906pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:h5="http://www.w3.org/1999/xhtml">
+    <path class="typst-shape" fill="#ffffff" fill-rule="nonzero" d="M 0 0v 297.6378 h 419.52756 v -297.6378 Z "/>
+    <g>
+        <g class="typst-group" transform="matrix(1 0 0 1 35.43307086614173 35.43307086614173)">
+            <g>
+                <g class="typst-text" transform="matrix(1 0 0 -1 0 14.283984375)">
+                    <use xlink:href="#gFACEBE700CE10700EB8CAE17DC480221" x="0" y="0"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <defs id="glyph">
+        <symbol id="gFACEBE700CE10700EB8CAE17DC480221" overflow="visible">
+            <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzQzNiIgaGVpZ2h0PSIyNDc2IiB2aWV3Qm94PSIwIDAgMzQzNiAyNDc2Ij4KICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIC0xIDAgMCkgbWF0cml4KDEgMCAwIDEgNzE5IC0xOTc1KSI+CiAgICAgICAgPHBhdGggZmlsbD0icmdiKDAsIDAsIDApIiBmaWxsLW9wYWNpdHk9IjEiIGQ9Ik0gMjU1NiAtNDMxIEwgMjU2IC00MzEgTCAyNTYgMTg2OSBMIDI1NTYgMTg2OSBMIDI1NTYgLTQzMSBaIi8+CiAgICAgICAgPHBhdGggZmlsbD0icmdiKDIyLCAxOTgsIDEyKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDI0MTIgLTI4NyBMIDQwMCAtMjg3IEwgNDAwIDE3MjUgTCAyNDEyIDE3MjUgTCAyNDEyIC0yODcgWiIvPgogICAgICAgIDxwYXRoIGZpbGw9InJnYigyNTUsIDI1NSwgMjU1KSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDIxMjUgMTIyMiBRIDE4NzEgOTY5IDE2MjEgNzE5LjUgUSAxMzcxIDQ3MCAxMTE4IDIxNiBRIDkwMyA0MzIgNjg3IDY0NyBMIDgzMSA3OTEgTCAxMTE4IDUwNCBRIDEzMjcgNzE2IDE1MzMuNSA5MjUgUSAxNzQwIDExMzQgMTk1NCAxMzQxIFEgMTk2MCAxMzQ3IDE5NjcgMTM1MyBRIDE5NzQgMTM1OSAxOTc5IDEzNjYgTCAyMTI1IDEyMjIgWiIvPgogICAgPC9nPgo8L3N2Zz4K" width="3436" height="2476" transform="matrix(0.0099609375 0 0 -0.0099609375 -7.1619140625 19.6728515625)" preserveAspectRatio="none"/>
+        </symbol>
+    </defs>
+</svg>
